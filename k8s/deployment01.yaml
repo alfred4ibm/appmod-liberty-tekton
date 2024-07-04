@@ -29,7 +29,7 @@ spec:
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: cos-liberty
+  name: cos-liberty-9443
   namespace: pipelines-tutorial
   labels:
     application: cos-liberty
