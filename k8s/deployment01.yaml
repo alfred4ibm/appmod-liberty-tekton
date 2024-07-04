@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: cos-liberty
-  namespace: cos-liberty-dev
+  namespace: pipelines-tutorial
   annotations:
     description: The web server's http port.
   labels:
@@ -30,7 +30,7 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: cos-liberty
-  namespace: cos-liberty-dev
+  namespace: pipelines-tutorial
   labels:
     application: cos-liberty
 spec:
@@ -48,7 +48,7 @@ kind: DeploymentConfig
 apiVersion: apps.openshift.io/v1
 metadata:
   name: cos-liberty
-  namespace: cos-liberty-dev
+  namespace: pipelines-tutorial
   labels:
     application: cos-liberty
 spec:
@@ -87,7 +87,7 @@ spec:
               value: db2inst1
             - name: DB2_PASSWORD
               value: db2inst1
-          image: image-registry.openshift-image-registry.svc:5000/cos-liberty-tekton/cos-liberty
+          image: image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/cos-liberty
           imagePullPolicy: Always
           livenessProbe:
             tcpSocket:
