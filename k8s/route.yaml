@@ -1,27 +1,27 @@
-kind: Route
-apiVersion: route.openshift.io/v1
-metadata:
-  name: cos-liberty-9081
-  namespace: pipelines-tutorial
-  labels:
-    application: cos-liberty
-spec:
-  to:
-    kind: Service
-    name: cos-liberty
-    weight: 100
-  port:
-    targetPort: http
-  tls:
-    termination: passthrough
-  wildcardPolicy: None
+#kind: Route
+#apiVersion: route.openshift.io/v1
+#metadata:
+#  name: cos-liberty-9081
+#  namespace: pipelines-tutorial
+#  labels:
+#    application: cos-liberty
+#spec:
+#  to:
+#    kind: Service
+#    name: cos-liberty
+#    weight: 100
+#  port:
+#    targetPort: http
+#  tls:
+#    termination: passthrough
+#  wildcardPolicy: None
 -----
 kind: Route
 apiVersion: v1
 metadata:
   name: cos-liberty-9080
   annotations:
-    description: Route for application's http service.
+    description: Route for application's http service /CustomerOrderServicesWeb username: rbarcia and password: bl0wfish
   labels:
     application: cos-liberty
 spec:
