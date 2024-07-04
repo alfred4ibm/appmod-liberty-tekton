@@ -40,7 +40,7 @@ spec:
               value: db2inst1
             - name: DB2_PASSWORD
               value: db2inst1
-          image: <DOCKER_IMAGE>
+          image: image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/cos-liberty
           imagePullPolicy: Always
           livenessProbe:
             tcpSocket:
