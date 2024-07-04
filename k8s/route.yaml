@@ -1,16 +1,17 @@
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: cos-liberty
+  name: cos-liberty-9081
   namespace: pipelines-tutorial
-  annotations:
-    description: Route for application's http service.
   labels:
     application: cos-liberty
 spec:
   to:
+    kind: Service
     name: cos-liberty
+    weight: 100
   port:
-    targetPort: 9080-tcp
+    targetPort: 9081-tcp
   tls:
-    termination: edge
+    termination: passthrough
+  wildcardPolicy: None
