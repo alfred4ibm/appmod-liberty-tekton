@@ -1,8 +1,8 @@
 kind: Route
 apiVersion: v1
-id: cos-liberty-http
 metadata:
   name: cos-liberty
+  namespace: pipelines-tutorial
   annotations:
     description: Route for application's http service.
   labels:
