@@ -1,0 +1,17 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  creationTimestamp: "2024-07-10T09:53:28Z"
+  generation: 1
+  name: cos-liberty-tb
+  namespace: pipelines-tutorial
+  resourceVersion: "12507388"
+  uid: 0c9ee51f-e4bd-4aa2-bd15-850c17836ef1
+spec:
+  params:
+  - name: git-repo-url
+    value: $(body.repository.url)
+  - name: git-repo-name
+    value: $(body.repository.name)
+  - name: git-revision
+    value: $(body.head_commit.id)

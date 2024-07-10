@@ -1,0 +1,24 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: Trigger
+metadata:
+  name: cos-liberty-trigger
+  namespace: pipelines-tutorial
+spec:
+  bindings:
+  - kind: TriggerBinding
+    ref: cos-liberty-tb
+  interceptors:
+  - params:
+    - name: secretRef
+      value:
+        secretKey: secretToken
+        secretName: github-secret
+    - name: eventTypes
+      value:
+      - push
+    ref:
+      kind: ClusterInterceptor
+      name: github
+  serviceAccountName: pipeline
+  template:
+    ref: cos-liberty-tt

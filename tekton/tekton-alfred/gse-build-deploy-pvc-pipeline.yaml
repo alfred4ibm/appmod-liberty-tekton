@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: gse-build-deploy-pvc-pipeline
+spec:
+  params:
+    - name: git-url
+      type: string
+    - name: docker-image
+      type: string
+  tasks:
+    - name: gse-build
+      taskRef:
+        name: gse-buildah-pvc-task
+        kind: Task
+      params:
+        - name: TLSVERIFY
+          value: "false"
+        - name: docker-image
+          value: $(params.docker-image) 
+    - name: gse-apply-manifests
+      params:
+        - name: docker-image
+          value: $(tasks.gse-build.results.docker-image)
+        - name: git-url
+          value: $(params.git-url)
+      taskRef:
+        name: gse-apply-manifests-pvc-task
+        kind: Task
+      runAfter:
+        - gse-build
+          

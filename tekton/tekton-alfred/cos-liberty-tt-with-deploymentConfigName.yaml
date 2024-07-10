@@ -1,0 +1,46 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  creationTimestamp: "2024-07-10T09:52:31Z"
+  generation: 2
+  name: cos-liberty-tt
+  namespace: pipelines-tutorial
+  resourceVersion: "12536516"
+  uid: 54b7a398-7d42-4674-8cd9-c18299ebd330
+spec:
+  params:
+  - description: The git repository url
+    name: git-repo-url
+  - default: master
+    description: The git revision
+    name: git-revision
+  - description: The name of the deployment to be created / patched
+    name: git-repo-name
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1
+    kind: PipelineRun
+    metadata:
+      generateName: build-deployconfig-$(tt.params.git-repo-name)-
+    spec:
+      params:
+      - name: deployment-name
+        value: cos-liberty
+      - name: git-url
+        value: $(tt.params.git-repo-url)
+      - name: git-revision
+        value: $(tt.params.git-revision)
+      - name: IMAGE
+        value: image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(tt.params.git-repo-name)
+      pipelineRef:
+        name: build-and-deployconfig
+      taskRunTemplate:
+        serviceAccountName: pipeline
+      workspaces:
+      - name: shared-workspace
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+            - ReadWriteOnce
+            resources:
+              requests:
+                storage: 500Mi

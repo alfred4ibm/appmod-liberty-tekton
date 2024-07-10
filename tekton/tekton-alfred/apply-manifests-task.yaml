@@ -1,0 +1,30 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  creationTimestamp: "2024-07-04T06:18:11Z"
+  generation: 1
+  name: apply-manifests
+  namespace: pipelines-tutorial
+  resourceVersion: "2850914"
+  uid: ed0feefd-45a6-43af-b01a-77d11d9e032c
+spec:
+  params:
+  - default: k8s
+    description: The directory in source that contains yaml manifests
+    name: manifest_dir
+    type: string
+  steps:
+  - args:
+    - |-
+      echo Applying manifests in $(inputs.params.manifest_dir) directory
+      oc apply -f $(inputs.params.manifest_dir)
+      echo -----------------------------------
+    command:
+    - /bin/bash
+    - -c
+    computeResources: {}
+    image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+    name: apply
+    workingDir: /workspace/source
+  workspaces:
+  - name: source

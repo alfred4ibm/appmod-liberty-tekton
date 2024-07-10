@@ -1,0 +1,43 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  creationTimestamp: "2024-07-10T09:49:06Z"
+  generation: 3
+  name: cos-liberty-el
+  namespace: pipelines-tutorial
+  resourceVersion: "12518436"
+  uid: 6fffaf59-7917-470e-be9b-84639bb0ae57
+spec:
+  namespaceSelector: {}
+  resources: {}
+  serviceAccountName: pipeline
+  triggers:
+  - triggerRef: cos-liberty-trigger
+status:
+  address:
+    url: http://el-cos-liberty-el.pipelines-tutorial.svc.cluster.local:8080
+  conditions:
+  - lastTransitionTime: "2024-07-10T09:49:19Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2024-07-10T09:49:19Z"
+    message: Deployment exists
+    status: "True"
+    type: Deployment
+  - lastTransitionTime: "2024-07-10T09:49:19Z"
+    message: ReplicaSet "el-cos-liberty-el-7d5f678664" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-07-10T09:49:19Z"
+    message: EventListener is ready
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-07-10T09:49:19Z"
+    message: Service exists
+    status: "True"
+    type: Service
+  configuration:
+    generatedName: el-cos-liberty-el
