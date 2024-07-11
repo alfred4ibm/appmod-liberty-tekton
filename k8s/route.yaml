@@ -15,7 +15,7 @@
 #  tls:
 #    termination: passthrough
 #  wildcardPolicy: None
------
+#---
 kind: Route
 apiVersion: v1
 metadata:
