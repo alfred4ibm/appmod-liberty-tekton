@@ -17,9 +17,10 @@
 #  wildcardPolicy: None
 ---
 kind: Route
-apiVersion: v1
+apiVersion: route.openshift.io/v1
 metadata:
   name: cos-liberty-9080
+  namespace: pipelines-tutorial
   annotations:
     description: "Route for application http service /CustomerOrderServicesWeb username: rbarcia and password: bl0wfish"
   labels:
